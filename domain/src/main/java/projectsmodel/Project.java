@@ -15,16 +15,14 @@ public class Project {
 
     private long projectId;
     private String name;
-    private Employee keeper;
     private List<Team> teams;
     private DateTime startDate;
     BigDecimal time;
     BigDecimal budget;
 
-    public Project(long projectId, String name, Employee leader, List<Team> teams, DateTime startDate, BigDecimal time, BigDecimal budget) {
+    public Project(long projectId, String name, List<Team> teams, DateTime startDate, BigDecimal time, BigDecimal budget) {
         this.projectId = projectId;
         this.name = name;
-        this.keeper = keeper;
         this.teams = teams;
         this.startDate = startDate;
         this.time = time;
@@ -45,14 +43,6 @@ public class Project {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Employee getkeeper() {
-        return keeper;
-    }
-
-    public void setkeeper(Employee keeper) {
-        this.keeper = keeper;
     }
 
     public List<Team> getTeams() {
