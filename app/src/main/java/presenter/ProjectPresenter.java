@@ -5,7 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import projectsmodel.Project;
-import view.ProjectOverviewController;
+import controllers.ProjectOverviewController;
 
 import java.io.IOException;
 import java.util.ArrayList;

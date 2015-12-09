@@ -1,4 +1,4 @@
-package view;
+package controllers;
 
 import presenter.ProjectPresenter;
 import projectsmodel.Project;
