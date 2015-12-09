@@ -10,6 +10,7 @@ import javafx.scene.control.TableView;
 import org.joda.time.DateTime;
 import othersmodel.Team;
 import othersmodel.TeamMember;
+import presenter.ProjectPresenter;
 import projectsmodel.Project;
 
 /**
@@ -18,6 +19,12 @@ import projectsmodel.Project;
 public class ProjectMembersOverviewController {
 
     private Project project;
+
+    private ProjectPresenter presenter;
+
+    public void setPresenter(ProjectPresenter presenter) {
+        this.presenter = presenter;
+    }
 
     @FXML
     private TableView<Team> teamsTable;
@@ -51,7 +58,7 @@ public class ProjectMembersOverviewController {
 
         teamsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-
+        teamColumn.setCellValueFactory(dataValue -> dataValue.getValue().getTeamNameProperty());
     }
 
 
@@ -59,7 +66,6 @@ public class ProjectMembersOverviewController {
         this.project = project;
         teamsTable.getItems().setAll(project.getTeams());
     }
-
 
 
 }
