@@ -1,38 +1,42 @@
 package projectsmodel;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import org.joda.time.DateTime;
 import othersmodel.Team;
 import othersmodel.TeamMember;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by Marcin on 2015-12-08.
- */
 public class Project {
 
     private long projectId;
-    private String name;
+    private StringProperty name;
     private List<Team> teams;
     private Map<TeamMember, String> memberRoleMap;
-    private DateTime startDate;
-    private DateTime endDate;
-    private BigDecimal budget;
+    private ObjectProperty<LocalDate> startDate;
+    private ObjectProperty<LocalDate> endDate;
+    private ObjectProperty<BigDecimal> budget;
 
-    public Project() {}
+    private Project() {
+        this(0, "", LocalDate.now(), LocalDate.now(), BigDecimal.ZERO);
+    }
 
-    public Project(long projectId, String name, DateTime startDate, DateTime endDate, BigDecimal budget) {
+    public Project(long projectId, String name, LocalDate startDate, LocalDate endDate, BigDecimal budget) {
         this.projectId = projectId;
-        this.name = name;
-        this.teams = new ArrayList<Team>();
-        this.memberRoleMap = new HashMap<TeamMember, String>();
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.budget = budget;
+        this.name = new SimpleStringProperty(name);
+        this.teams = new ArrayList<>();
+        this.memberRoleMap = new HashMap<>();
+        this.startDate = new SimpleObjectProperty<>(startDate);
+        this.endDate = new SimpleObjectProperty<>(endDate);
+        this.budget = new SimpleObjectProperty<>(budget);
     }
 
     public long getProjectId() {
@@ -44,11 +48,15 @@ public class Project {
     }
 
     public String getName() {
-        return name;
+        return name.getValue();
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name.setValue(name);
+    }
+
+    public StringProperty getNameProperty(){
+        return name;
     }
 
     public List<Team> getTeams() {
@@ -67,28 +75,40 @@ public class Project {
         this.memberRoleMap = memberRoleMap;
     }
 
-    public DateTime getStartDate() {
+    public LocalDate getStartDate() {
+        return startDate.getValue();
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate.setValue(startDate);
+    }
+
+    public ObjectProperty<LocalDate> getStartDateProperty(){
         return startDate;
     }
 
-    public void setStartDate(DateTime startDate) {
-        this.startDate = startDate;
+    public LocalDate getEndDate() {
+        return endDate.getValue();
     }
 
-    public DateTime getEndDate() {
+    public void setEndDate(LocalDate endDate) {
+        this.endDate.setValue(endDate);
+    }
+
+    public ObjectProperty<LocalDate> getEndDateProperty(){
         return endDate;
     }
 
-    public void setEndDate(DateTime endDate) {
-        this.endDate = endDate;
-    }
-
     public BigDecimal getBudget() {
-        return budget;
+        return budget.getValue();
     }
 
     public void setBudget(BigDecimal budget) {
-        this.budget = budget;
+        this.budget.setValue(budget);
+    }
+
+    public ObjectProperty<BigDecimal> getBudgetProperty(){
+        return budget;
     }
 
     public void addTeam(Team team) {
@@ -97,6 +117,10 @@ public class Project {
 
     public void addRole(TeamMember teamMember, String role) {
         memberRoleMap.put(teamMember, role);
+    }
+
+    public static Project newProject() {
+        return new Project();
     }
 
 }

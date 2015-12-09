@@ -1,3 +1,5 @@
+import dummy.DummyProjects;
+import interfaces.IProjectsSource;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import presenter.ProjectPresenter;
@@ -8,6 +10,8 @@ public class App extends Application{
 
     private ProjectPresenter presenter;
 
+    private IProjectsSource projectsSource = new DummyProjects();
+
     @Override
     public void start(Stage primaryStage) {
 
@@ -15,6 +19,7 @@ public class App extends Application{
         this.primaryStage.setTitle("Projects");
 
         this.presenter = new ProjectPresenter(primaryStage);
+        this.presenter.setProjectsSource(projectsSource);
         this.presenter.initRootLayout();
 
     }
