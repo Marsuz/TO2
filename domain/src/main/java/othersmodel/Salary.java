@@ -1,11 +1,13 @@
 package othersmodel;
 
+import interfaces.ISalary;
+
 import java.math.BigDecimal;
 
 /**
  * Created by Marcin on 2015-12-08.
  */
-public class Salary {
+public class Salary implements ISalary {
 
     private BigDecimal salary;
 

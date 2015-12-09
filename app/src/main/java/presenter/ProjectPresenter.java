@@ -1,8 +1,7 @@
 package presenter;
 
 import controllers.ProjectEditDialogController;
-import controllers.ProjectMembersOverviewController;
-import interfaces.IProjectsSource;
+import interfaces.modules.IProjectsSource;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -12,7 +11,6 @@ import projectsmodel.Project;
 import controllers.ProjectOverviewController;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class ProjectPresenter {
 

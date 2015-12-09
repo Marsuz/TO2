@@ -1,6 +1,6 @@
 package dummy;
 
-import interfaces.IProjectsSource;
+import interfaces.modules.IProjectsSource;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import projectsmodel.Project;

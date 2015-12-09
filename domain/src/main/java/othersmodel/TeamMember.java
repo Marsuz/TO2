@@ -1,19 +1,23 @@
 package othersmodel;
 
+import interfaces.IEmployee;
+import interfaces.ITeam;
+import interfaces.ITeamMember;
+
 /**
  * Created by Marcin on 2015-12-08.
  */
-public class TeamMember {
+public class TeamMember implements ITeamMember{
 
-    private Team team;
-    private Employee employee;
+    private ITeam team;
+    private IEmployee employee;
 
-    public TeamMember(Team team, Employee employee) {
+    public TeamMember(ITeam team, IEmployee employee) {
         this.team = team;
         this.employee = employee;
     }
 
-    public Team getTeam() {
+    public ITeam getTeam() {
         return team;
     }
 
@@ -21,7 +25,7 @@ public class TeamMember {
         this.team = team;
     }
 
-    public Employee getEmployee() {
+    public IEmployee getEmployee() {
         return employee;
     }
 

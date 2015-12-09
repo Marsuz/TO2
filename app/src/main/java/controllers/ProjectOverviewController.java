@@ -1,8 +1,7 @@
 package controllers;
 
-import interfaces.IProjectsSource;
+import interfaces.modules.IProjectsSource;
 import javafx.beans.binding.Bindings;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

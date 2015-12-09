@@ -1,71 +1,71 @@
 package othersmodel;
 
+import interfaces.ITeam;
+import interfaces.ITeamMember;
 import javafx.beans.property.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.util.List;
 
 /**
  * Created by Marcin on 2015-12-08.
  */
-public class Team {
+public class Team implements ITeam{
 
-    private LongProperty teamId;
-    private StringProperty teamName;
-    private ObjectProperty<TeamMember> leader;
-    private ObjectProperty<List<TeamMember>> teamMemberList;
+    private LongProperty id;
+    private StringProperty name;
+    private ObjectProperty<ITeamMember> leader;
+    private ObservableList<ITeamMember> teamMembers;
 
-    public Team(long teamId, String teamName, TeamMember leader, List<TeamMember> teamMemberList) {
-        this.teamId = new SimpleLongProperty(teamId);
-        this.teamName = new SimpleStringProperty(teamName);
-        this.leader = new SimpleObjectProperty<TeamMember>(leader);
-        this.teamMemberList = new SimpleObjectProperty<List<TeamMember>>(teamMemberList);
+    public Team(long id, String name, ITeamMember leader, List<ITeamMember> teamMembers) {
+        this.id = new SimpleLongProperty(id);
+        this.name = new SimpleStringProperty(name);
+        this.leader = new SimpleObjectProperty<>(leader);
+        this.teamMembers = FXCollections.observableArrayList();
     }
 
-    public long getTeamId() {
-        return teamId.getValue();
+    public long getId() {
+        return id.getValue();
     }
 
-    public LongProperty getTeamIdProperty() {
-        return teamId;
+    public LongProperty getIdProperty() {
+        return id;
     }
 
-    public void setTeamId(long teamId) {
-        this.teamId.set(teamId);
+    public void setId(long teamId) {
+        this.id.set(teamId);
     }
 
-    public String getTeamName() {
-        return teamName.getValue();
+    public String getName() {
+        return name.getValue();
     }
 
-    public StringProperty getTeamNameProperty() {
-        return teamName;
+    public StringProperty getNameProperty() {
+        return name;
     }
 
-    public void setTeamName(String teamName) {
-        this.teamName.set(teamName);
+    public void setName(String teamName) {
+        this.name.set(teamName);
     }
 
-    public TeamMember getLeader() {
+    public ITeamMember getLeader() {
         return leader.getValue();
     }
 
-    public ObjectProperty<TeamMember> getLeaderProperty() {
+    public ObjectProperty<ITeamMember> getLeaderProperty() {
         return leader;
     }
 
-    public void setLeader(TeamMember leader) {
+    public void setLeader(ITeamMember leader) {
         this.leader.set(leader);
     }
 
-    public List<TeamMember> getTeamMemberList() {
-        return teamMemberList.getValue();
+    public ObservableList<ITeamMember> getTeamMembers() {
+        return teamMembers;
     }
 
-    public ObjectProperty<List<TeamMember>> getTeamMemberListProperty() {
-        return teamMemberList;
-    }
-
-    public void setTeamMemberList(List<TeamMember> teamMemberList) {
-        this.teamMemberList.set(teamMemberList);
+    public void addTeamMember(ITeamMember teamMember) {
+        this.teamMembers.add(teamMember);
     }
 }

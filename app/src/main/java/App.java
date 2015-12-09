@@ -1,5 +1,5 @@
 import dummy.DummyProjects;
-import interfaces.IProjectsSource;
+import interfaces.modules.IProjectsSource;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import presenter.ProjectPresenter;
