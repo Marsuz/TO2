@@ -43,7 +43,7 @@ public class ProjectMembersOverviewController {
     private TreeTableColumn<ITeamMember, String> occupationColumn;
 
     @FXML
-    private Button deleteTeamButton;
+    private Button removeTeamButton;
 
     @FXML
     private Button addTeamButton;
@@ -115,8 +115,19 @@ public class ProjectMembersOverviewController {
     }
 
     @FXML
+    private void handleRemoveTeamAction() {
+
+    }
+
+    @FXML
+    private void handleAddTeamAction() {
+
+    }
+
+
+    @FXML
     private void handleBackAction() {
-        
+
         presenter.goBackToMainPage();
 
     }
