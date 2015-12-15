@@ -18,6 +18,10 @@ public class Team implements ITeam{
     private ObjectProperty<ITeamMember> leader;
     private ObservableList<ITeamMember> teamMembers;
 
+    public Team(){
+
+    }
+
     public Team(long id, String name, ITeamMember leader, List<ITeamMember> teamMembers) {
         this.id = new SimpleLongProperty(id);
         this.name = new SimpleStringProperty(name);

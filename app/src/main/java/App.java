@@ -2,13 +2,14 @@ import dummy.DummyProjects;
 import interfaces.modules.IProjectsSource;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import presenter.ProjectMembersPresenter;
 import presenter.ProjectPresenter;
 
 public class App extends Application{
 
     private Stage primaryStage;
 
-    private ProjectPresenter presenter;
+    private ProjectMembersPresenter presenter;
 
     private IProjectsSource projectsSource = new DummyProjects();
 
@@ -18,11 +19,13 @@ public class App extends Application{
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Projects");
 
-        this.presenter = new ProjectPresenter(primaryStage);
+        this.presenter = new ProjectMembersPresenter(primaryStage);
         this.presenter.setProjectsSource(projectsSource);
         this.presenter.initRootLayout();
 
     }
+
+
 
 
     public static void main(String[] args) {
