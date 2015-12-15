@@ -19,7 +19,10 @@ public class Team implements ITeam{
     private ObservableList<ITeamMember> teamMembers;
 
     public Team(){
-
+        this.id = new SimpleLongProperty();
+        this.name = new SimpleStringProperty();
+        this.leader = new SimpleObjectProperty<>();
+        this.teamMembers = FXCollections.observableArrayList();
     }
 
     public Team(long id, String name, ITeamMember leader, List<ITeamMember> teamMembers) {

@@ -14,6 +14,10 @@ public class Employee implements IEmployee{
     private ISalary salary;
     private String occupation;
 
+    public Employee(){
+
+    }
+
     public Employee(long id, String firstName, String lastName, ISalary salary, String occupation) {
         this.id = id;
         this.firstName = firstName;

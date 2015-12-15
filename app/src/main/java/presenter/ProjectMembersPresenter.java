@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import projectsmodel.Project;
 
 import java.io.IOException;
 
@@ -37,6 +38,8 @@ public class ProjectMembersPresenter {
             ProjectMembersOverviewController controller = loader.getController();
             controller.setPresenter(this);
             //controller.setData(new ArrayList<Project>());
+
+            controller.setProject(Project.newProject());
 
             // add layout to a scene and show them all
             Scene scene = new Scene(rootLayout);

@@ -1,6 +1,8 @@
 package controllers;
 
 
+import interfaces.ITeamMember;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import othersmodel.Employee;
@@ -11,6 +13,8 @@ import presenter.ProjectMembersPresenter;
 import projectsmodel.Project;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Marcin on 2015-12-09.
@@ -26,16 +30,16 @@ public class ProjectMembersOverviewController {
     }
 
     @FXML
-    private TreeTableView<String> membersTable;
+    private TreeTableView<ITeamMember> membersTable;
 
     @FXML
-    private TreeTableColumn<String, String> firstNameColumn;
+    private TreeTableColumn<ITeamMember, String> firstNameColumn;
 
     @FXML
-    private TreeTableColumn<String, String> lastNameColumn;
+    private TreeTableColumn<ITeamMember, String> lastNameColumn;
 
     @FXML
-    private TreeTableColumn<String, String> occupationColumn;
+    private TreeTableColumn<ITeamMember, String> occupationColumn;
 
     @FXML
     private Button deleteTeamButton;
@@ -47,52 +51,63 @@ public class ProjectMembersOverviewController {
     private void initialize() {
 
         membersTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        //membersTable.setCellValueFactory(dataValue -> dataValue.getValue().getNameProperty());
+        firstNameColumn.setCellValueFactory(
+                (TreeTableColumn.CellDataFeatures<ITeamMember, String> param) ->
+                        new ReadOnlyStringWrapper(param.getValue().getValue().getEmployee().getFirstName())
+        );
+        lastNameColumn.setCellValueFactory(
+                (TreeTableColumn.CellDataFeatures<ITeamMember, String> param) ->
+                        new ReadOnlyStringWrapper(param.getValue().getValue().getEmployee().getLastName())
+        );
+        occupationColumn.setCellValueFactory(
+                (TreeTableColumn.CellDataFeatures<ITeamMember, String> param) ->
+                        new ReadOnlyStringWrapper(param.getValue().getValue().getEmployee().getOccupation())
+        );
 
-        Team team = new Team();
-        team.setName("team1");
-        Team team2 = new Team();
-        team.setName("team2");
-        loadTreeItems(new TeamMember(team, new Employee(1, "Marek", "Marek", new Salary(BigDecimal.ZERO), "occ")),
-                new TeamMember(team, new Employee(2, "Darek", "Marek", new Salary(BigDecimal.ZERO), "occ")),
-                new TeamMember(team2, new Employee(3, "Jarek", "Marek", new Salary(BigDecimal.ZERO), "occ"))
-                );
     }
 
 
     public void setProject(Project project) {
+        List<Team> teams = new ArrayList<>();
+        Team team1 = new Team();
+        team1.setName("team1");
+        team1.addTeamMember(new TeamMember(team1, new Employee(0, "Marek", "Marek", new Salary(BigDecimal.ZERO), "occ")));
+        team1.addTeamMember(new TeamMember(team1, new Employee(1, "Darek", "Marek", new Salary(BigDecimal.ZERO), "occ")));
+        team1.addTeamMember(new TeamMember(team1, new Employee(2, "Jarek", "Marek", new Salary(BigDecimal.ZERO), "occ")));
+        Team team2 = new Team();
+        team2.setName("team2");
+        team2.addTeamMember(new TeamMember(team2, new Employee(3, "Jan", "Nowak", new Salary(BigDecimal.ZERO), "occ")));
+        loadTreeItems(team1, team2);
         /*this.project = project;
         teamsTable.getItems().setAll(project.getTeams());*/
     }
 
-    public void loadTreeItems(TeamMember... members) {
-        TreeItem<String> root = new TreeItem<>("Root Node");
-        root.setExpanded(true);
-        /*for (String itemString: rootItems) {
-            root.getChildren().add(new TreeItem<>(itemString));
-        }*/
 
-        /*for (TeamMember member : members) {
-            TreeItem<String> empLeaf = new TreeItem<String>(member.getEmployee().getFirstName());
-            boolean found = false;
-            for (TreeItem<String> depNode : rootNode.getChildren()) {
-                if (depNode.getValue().contentEquals(employee.getDepartment())){
-                    depNode.getChildren().add(empLeaf);
-                    found = true;
-                    break;
-                }
+    public void loadTreeItems(Team... rootItems) {
+        Employee emp = new Employee();
+        emp.setFirstName("Teams");
+
+        TreeItem<ITeamMember> root = new TreeItem<>(new TeamMember(new Team(), emp));
+        root.setExpanded(true);
+
+        for (Team team: rootItems) {
+            TreeItem<ITeamMember> teamNode = teamAsTreeItem(team);
+            root.getChildren().add(teamNode);
+
+            for(ITeamMember member: team.getTeamMembers()){
+                TreeItem<ITeamMember> memberNode = new TreeItem<>(member);
+                teamNode.getChildren().add(memberNode);
             }
-            if (!found) {
-                TreeItem<String> depNode = new TreeItem<String>(
-                        employee.getDepartment()
-                );
-                rootNode.getChildren().add(depNode);
-                depNode.getChildren().add(empLeaf);
-            }
-        }*/
+
+        }
 
         membersTable.setRoot(root);
     }
 
+    public TreeItem<ITeamMember> teamAsTreeItem(Team team){
+        Employee emp = new Employee();
+        emp.setFirstName(team.getName());
+        return new TreeItem<>(new TeamMember(team, emp));
+    }
 
 }
