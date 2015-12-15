@@ -3,6 +3,10 @@ package othersmodel;
 import interfaces.IEmployee;
 import interfaces.ITeam;
 import interfaces.ITeamMember;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 /**
  * Created by Marcin on 2015-12-08.
@@ -31,5 +35,9 @@ public class TeamMember implements ITeamMember{
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
+    }
+
+    public ObjectProperty<ITeam> getTeamProperty() {
+        return new SimpleObjectProperty<ITeam>(team);
     }
 }

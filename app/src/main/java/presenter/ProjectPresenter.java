@@ -1,6 +1,7 @@
 package presenter;
 
 import controllers.ProjectEditDialogController;
+import controllers.ProjectFinancialOverviewController;
 import controllers.ProjectMembersOverviewController;
 import interfaces.modules.IProjectsSource;
 import javafx.fxml.FXMLLoader;
@@ -113,8 +114,37 @@ public class ProjectPresenter {
         }
     }
 
+    public void showFinancialOverview(Project project) {
+        try {
+            this.primaryStage.setTitle("Financial Details");
+
+            // load layout from FXML file
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("../view/ProjectFinancialOverview.fxml"));
+            BorderPane rootLayout = (BorderPane) loader.load();
+
+            // set initial data into controller
+            ProjectFinancialOverviewController controller = loader.getController();
+            controller.setPresenter(this);
+            controller.setProject(project);
+            //controller.setData(new ArrayList<Project>());
+
+            //controller.setProject(Project.newProject());
+
+            // add layout to a scene and show them all
+            Scene scene = new Scene(rootLayout);
+            primaryStage.setScene(scene);
+            //primaryStage.show();
+
+        } catch (IOException e) {
+            // don't do this in common apps
+            e.printStackTrace();
+        }
+    }
+
     public void goBackToMainPage() {
 
+        primaryStage.setTitle("Projects");
         primaryStage.setScene(primaryScene);
 
     }

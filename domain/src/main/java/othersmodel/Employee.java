@@ -2,6 +2,12 @@ package othersmodel;
 
 import interfaces.IEmployee;
 import interfaces.ISalary;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
+import java.math.BigDecimal;
 
 /**
  * Created by Marcin on 2015-12-08.
@@ -65,4 +71,13 @@ public class Employee implements IEmployee{
     public void setOccupation(String occupation) {
         this.occupation = occupation;
     }
+
+    public StringProperty getFullNameProperty() {
+        return new SimpleStringProperty(firstName + " " + lastName);
+    }
+
+    public ObjectProperty getSalaryProperty() {
+        return new SimpleObjectProperty<BigDecimal>(salary.getSalary());
+    }
+
 }

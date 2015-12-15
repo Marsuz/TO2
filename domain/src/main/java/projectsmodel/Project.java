@@ -4,22 +4,21 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.joda.time.DateTime;
 import othersmodel.Team;
 import othersmodel.TeamMember;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Project {
 
     private long projectId;
     private StringProperty name;
-    private List<Team> teams;
+    private ObservableList<Team> teams;
     private Map<TeamMember, String> memberRoleMap;
     private ObjectProperty<LocalDate> startDate;
     private ObjectProperty<LocalDate> endDate;
@@ -32,7 +31,7 @@ public class Project {
     public Project(long projectId, String name, LocalDate startDate, LocalDate endDate, BigDecimal budget) {
         this.projectId = projectId;
         this.name = new SimpleStringProperty(name);
-        this.teams = new ArrayList<>();
+        this.teams = FXCollections.observableArrayList();
         this.memberRoleMap = new HashMap<>();
         this.startDate = new SimpleObjectProperty<>(startDate);
         this.endDate = new SimpleObjectProperty<>(endDate);
@@ -63,7 +62,7 @@ public class Project {
         return teams;
     }
 
-    public void setTeams(List<Team> teams) {
+    public void setTeams(ObservableList<Team> teams) {
         this.teams = teams;
     }
 

@@ -44,6 +44,9 @@ public class ProjectOverviewController {
     @FXML
     private Button projectMembersButton;
 
+    @FXML
+    private Button projectFinancialDetailsButton;
+
     public void setData(IProjectsSource projects) {
         this.data = projects.getProjects();
         projectsTable.setItems(projects.getProjects());
@@ -105,6 +108,14 @@ public class ProjectOverviewController {
         Project project = projectsTable.getSelectionModel().getSelectedItem();
         if (project != null) {
             presenter.showProjectMembersOverview(project);
+        }
+    }
+
+    @FXML
+    private void handleFinancialDetailsAction(ActionEvent event) {
+        Project project = projectsTable.getSelectionModel().getSelectedItem();
+        if (project != null) {
+            presenter.showFinancialOverview(project);
         }
     }
 
