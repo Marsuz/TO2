@@ -41,6 +41,9 @@ public class ProjectOverviewController {
     @FXML
     private Button addButton;
 
+    @FXML
+    private Button projectMembersButton;
+
     public void setData(IProjectsSource projects) {
         this.data = projects.getProjects();
         projectsTable.setItems(projects.getProjects());
@@ -67,6 +70,9 @@ public class ProjectOverviewController {
 
         editButton.disableProperty().bind(
                 Bindings.size(projectsTable.getSelectionModel().getSelectedItems()).isNotEqualTo(1));
+
+        projectMembersButton.disableProperty().bind(
+                Bindings.size(projectsTable.getSelectionModel().getSelectedItems()).isNotEqualTo(1));
     }
 
     @FXML
@@ -91,6 +97,14 @@ public class ProjectOverviewController {
 
         if (presenter.showProjectEditDialog(project)) {
             data.add(project);
+        }
+    }
+
+    @FXML
+    private void handleProjectMembersAction(ActionEvent event) {
+        Project project = projectsTable.getSelectionModel().getSelectedItem();
+        if (project != null) {
+            presenter.showProjectMembersOverview(project);
         }
     }
 

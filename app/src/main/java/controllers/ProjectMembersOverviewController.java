@@ -10,6 +10,7 @@ import othersmodel.Salary;
 import othersmodel.Team;
 import othersmodel.TeamMember;
 import presenter.ProjectMembersPresenter;
+import presenter.ProjectPresenter;
 import projectsmodel.Project;
 
 import java.math.BigDecimal;
@@ -23,9 +24,9 @@ public class ProjectMembersOverviewController {
 
     private Project project;
 
-    private ProjectMembersPresenter presenter;
+    private ProjectPresenter presenter;
 
-    public void setPresenter(ProjectMembersPresenter presenter) {
+    public void setPresenter(ProjectPresenter presenter) {
         this.presenter = presenter;
     }
 
@@ -46,6 +47,9 @@ public class ProjectMembersOverviewController {
 
     @FXML
     private Button addTeamButton;
+
+    @FXML
+    private Button backButton;
 
     @FXML
     private void initialize() {
@@ -108,6 +112,13 @@ public class ProjectMembersOverviewController {
         Employee emp = new Employee();
         emp.setFirstName(team.getName());
         return new TreeItem<>(new TeamMember(team, emp));
+    }
+
+    @FXML
+    private void handleBackAction() {
+        
+        presenter.goBackToMainPage();
+
     }
 
 }

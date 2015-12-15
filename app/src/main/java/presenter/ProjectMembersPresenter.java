@@ -25,7 +25,7 @@ public class ProjectMembersPresenter {
         this.source = source;
     }
 
-    public void initRootLayout() {
+    /*public void initRootLayout() {
         try {
             this.primaryStage.setTitle("ProjectMembers");
 
@@ -51,6 +51,6 @@ public class ProjectMembersPresenter {
             e.printStackTrace();
         }
 
-    }
+    }*/
 
 }

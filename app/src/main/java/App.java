@@ -9,7 +9,7 @@ public class App extends Application{
 
     private Stage primaryStage;
 
-    private ProjectMembersPresenter presenter;
+    private ProjectPresenter presenter;
 
     private IProjectsSource projectsSource = new DummyProjects();
 
@@ -18,8 +18,7 @@ public class App extends Application{
 
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Projects");
-
-        this.presenter = new ProjectMembersPresenter(primaryStage);
+        this.presenter = new ProjectPresenter(primaryStage);
         this.presenter.setProjectsSource(projectsSource);
         this.presenter.initRootLayout();
 

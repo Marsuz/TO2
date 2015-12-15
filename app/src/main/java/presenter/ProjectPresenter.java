@@ -17,6 +17,8 @@ public class ProjectPresenter {
 
     private Stage primaryStage;
 
+    private Scene primaryScene;
+
     private IProjectsSource source;
 
     public ProjectPresenter(Stage primaryStage) {
@@ -42,8 +44,8 @@ public class ProjectPresenter {
             controller.setData(source);
 
             // add layout to a scene and show them all
-            Scene scene = new Scene(rootLayout);
-            primaryStage.setScene(scene);
+            primaryScene = new Scene(rootLayout);
+            primaryStage.setScene(primaryScene);
             primaryStage.show();
 
         } catch (IOException e) {
@@ -81,6 +83,40 @@ public class ProjectPresenter {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public void showProjectMembersOverview(Project project) {
+        try {
+            this.primaryStage.setTitle("ProjectMembers");
+
+            // load layout from FXML file
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("../view/ProjectMembersOverview.fxml"));
+            BorderPane rootLayout = (BorderPane) loader.load();
+
+            // set initial data into controller
+            ProjectMembersOverviewController controller = loader.getController();
+            controller.setPresenter(this);
+            controller.setProject(project);
+            //controller.setData(new ArrayList<Project>());
+
+            //controller.setProject(Project.newProject());
+
+            // add layout to a scene and show them all
+            Scene scene = new Scene(rootLayout);
+            primaryStage.setScene(scene);
+            //primaryStage.show();
+
+        } catch (IOException e) {
+            // don't do this in common apps
+            e.printStackTrace();
+        }
+    }
+
+    public void goBackToMainPage() {
+
+        primaryStage.setScene(primaryScene);
+
     }
 
 
