@@ -115,6 +115,10 @@ public class Project {
         teams.add(team);
     }
 
+    public void removeTeam(ITeam team) {
+        teams.remove(team);
+    }
+
     public void addRole(TeamMember teamMember, String role) {
         memberRoleMap.put(teamMember, role);
     }

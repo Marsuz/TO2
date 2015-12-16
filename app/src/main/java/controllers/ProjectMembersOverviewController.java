@@ -3,6 +3,7 @@ package controllers;
 
 import interfaces.ITeam;
 import interfaces.ITeamMember;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -10,7 +11,6 @@ import othersmodel.Employee;
 import othersmodel.Salary;
 import othersmodel.Team;
 import othersmodel.TeamMember;
-import presenter.ProjectMembersPresenter;
 import presenter.ProjectPresenter;
 import projectsmodel.Project;
 
@@ -26,6 +26,8 @@ public class ProjectMembersOverviewController {
     private Project project;
 
     private ProjectPresenter presenter;
+
+    TreeItem<ITeamMember> root;
 
     public void setPresenter(ProjectPresenter presenter) {
         this.presenter = presenter;
@@ -69,6 +71,9 @@ public class ProjectMembersOverviewController {
                         new ReadOnlyStringWrapper(param.getValue().getValue().getEmployee().getOccupation())
         );
 
+        removeTeamButton.disableProperty().bind(
+                Bindings.size(membersTable.getSelectionModel().getSelectedItems()).isNotEqualTo(1));
+
     }
 
 
@@ -92,7 +97,7 @@ public class ProjectMembersOverviewController {
         Employee emp = new Employee();
         emp.setFirstName("Teams");
 
-        TreeItem<ITeamMember> root = new TreeItem<>(new TeamMember(new Team(), emp));
+        root = new TreeItem<>(new TeamMember(new Team(), emp));
         root.setExpanded(true);
 
         for (ITeam team: rootItems) {
@@ -117,6 +122,11 @@ public class ProjectMembersOverviewController {
 
     @FXML
     private void handleRemoveTeamAction() {
+        TreeItem<ITeamMember> item = membersTable.getSelectionModel().getSelectedItem();
+        if(item.getParent().equals(root)) {
+            ITeam toDelete = item.getValue().getTeam();
+            project.removeTeam(toDelete);
+        }
 
     }
 
