@@ -1,5 +1,6 @@
 package projectsmodel;
 
+import interfaces.ITeam;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -18,7 +19,7 @@ public class Project {
 
     private long projectId;
     private StringProperty name;
-    private ObservableList<Team> teams;
+    private ObservableList<ITeam> teams;
     private Map<TeamMember, String> memberRoleMap;
     private ObjectProperty<LocalDate> startDate;
     private ObjectProperty<LocalDate> endDate;
@@ -58,11 +59,11 @@ public class Project {
         return name;
     }
 
-    public List<Team> getTeams() {
+    public List<ITeam> getTeams() {
         return teams;
     }
 
-    public void setTeams(ObservableList<Team> teams) {
+    public void setTeams(ObservableList<ITeam> teams) {
         this.teams = teams;
     }
 
@@ -110,7 +111,7 @@ public class Project {
         return budget;
     }
 
-    public void addTeam(Team team) {
+    public void addTeam(ITeam team) {
         teams.add(team);
     }
 

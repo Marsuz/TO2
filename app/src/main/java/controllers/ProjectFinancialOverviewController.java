@@ -52,7 +52,7 @@ public class ProjectFinancialOverviewController {
     public void setProject(Project project) {
         this.project = project;
         ObservableList<ITeamMember> teamMembers = FXCollections.observableArrayList();
-        for(Team t : project.getTeams()) {
+        for(ITeam t : project.getTeams()) {
             for(ITeamMember tm : t.getTeamMembers()) {
                 teamMembers.add(tm);
             }

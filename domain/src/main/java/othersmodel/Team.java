@@ -6,6 +6,7 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -75,4 +76,14 @@ public class Team implements ITeam{
     public void addTeamMember(ITeamMember teamMember) {
         this.teamMembers.add(teamMember);
     }
+
+    public BigDecimal getCost() {
+        BigDecimal result = new BigDecimal(0);
+        for(ITeamMember m : teamMembers) {
+            result.add(m.getEmployee().getSalary().getSalary());
+        }
+        return result;
+    }
+
+
 }

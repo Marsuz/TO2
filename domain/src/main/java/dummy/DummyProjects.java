@@ -21,10 +21,10 @@ public class DummyProjects implements IProjectsSource {
         team1.setName("team1");
         Team team2 = new Team();
         team2.setName("team2");
-        TeamMember tm1 = new TeamMember(team1, new Employee(0, "Marek", "Marek", new Salary(BigDecimal.ZERO), "occ"));
-        TeamMember tm2 = new TeamMember(team1, new Employee(1, "Darek", "Marek", new Salary(BigDecimal.ZERO), "occ"));
-        TeamMember tm3 = new TeamMember(team1, new Employee(2, "Jarek", "Marek", new Salary(BigDecimal.ZERO), "occ"));
-        TeamMember tm4 = new TeamMember(team2, new Employee(3, "Jan", "Nowak", new Salary(BigDecimal.ZERO), "occ"));
+        TeamMember tm1 = new TeamMember(team1, new Employee(0, "Marek", "Marek", new Salary(new BigDecimal(3000)), "Junior Software Engineer"));
+        TeamMember tm2 = new TeamMember(team1, new Employee(1, "Darek", "Marek", new Salary(new BigDecimal(4000)), "Software Engineer"));
+        TeamMember tm3 = new TeamMember(team1, new Employee(2, "Jarek", "Marek", new Salary(new BigDecimal(4000)), "Software Engineer"));
+        TeamMember tm4 = new TeamMember(team2, new Employee(3, "Jan", "Nowak", new Salary(new BigDecimal(6000)), "Senior Software Engineer"));
         team1.addTeamMember(tm1);
         team1.addTeamMember(tm2);
         team1.addTeamMember(tm3);

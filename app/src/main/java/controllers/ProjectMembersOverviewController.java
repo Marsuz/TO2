@@ -1,6 +1,7 @@
 package controllers;
 
 
+import interfaces.ITeam;
 import interfaces.ITeamMember;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
@@ -72,29 +73,29 @@ public class ProjectMembersOverviewController {
 
 
     public void setProject(Project project) {
-        List<Team> teams = new ArrayList<>();
+        /*List<Team> teams = new ArrayList<>();
         Team team1 = new Team();
         team1.setName("team1");
-        team1.addTeamMember(new TeamMember(team1, new Employee(0, "Marek", "Marek", new Salary(BigDecimal.ZERO), "occ")));
-        team1.addTeamMember(new TeamMember(team1, new Employee(1, "Darek", "Marek", new Salary(BigDecimal.ZERO), "occ")));
-        team1.addTeamMember(new TeamMember(team1, new Employee(2, "Jarek", "Marek", new Salary(BigDecimal.ZERO), "occ")));
+        team1.addTeamMember(new TeamMember(team1, new Employee(0, "Marek", "Marek", new Salary(new BigDecimal(3000)), "Junior Software Engineer")));
+        team1.addTeamMember(new TeamMember(team1, new Employee(1, "Darek", "Marek", new Salary(new BigDecimal(4000)), "Software Engineer")));
+        team1.addTeamMember(new TeamMember(team1, new Employee(2, "Jarek", "Marek", new Salary(new BigDecimal(4000)), "Software Engineer")));
         Team team2 = new Team();
         team2.setName("team2");
-        team2.addTeamMember(new TeamMember(team2, new Employee(3, "Jan", "Nowak", new Salary(BigDecimal.ZERO), "occ")));
-        loadTreeItems(team1, team2);
+        team2.addTeamMember(new TeamMember(team2, new Employee(3, "Jan", "Nowak", new Salary(new BigDecimal(6000)), "Senior Software Engineer")));*/
         this.project = project;
+        loadTreeItems(project.getTeams());
         //teamsTable.getItems().setAll(project.getTeams());
     }
 
 
-    public void loadTreeItems(Team... rootItems) {
+    public void loadTreeItems(List<ITeam> rootItems) {
         Employee emp = new Employee();
         emp.setFirstName("Teams");
 
         TreeItem<ITeamMember> root = new TreeItem<>(new TeamMember(new Team(), emp));
         root.setExpanded(true);
 
-        for (Team team: rootItems) {
+        for (ITeam team: rootItems) {
             TreeItem<ITeamMember> teamNode = teamAsTreeItem(team);
             root.getChildren().add(teamNode);
 
@@ -108,7 +109,7 @@ public class ProjectMembersOverviewController {
         membersTable.setRoot(root);
     }
 
-    public TreeItem<ITeamMember> teamAsTreeItem(Team team){
+    public TreeItem<ITeamMember> teamAsTreeItem(ITeam team){
         Employee emp = new Employee();
         emp.setFirstName(team.getName());
         return new TreeItem<>(new TeamMember(team, emp));
@@ -121,6 +122,8 @@ public class ProjectMembersOverviewController {
 
     @FXML
     private void handleAddTeamAction() {
+
+        presenter.showAddTeamDialog(project);
 
     }
 

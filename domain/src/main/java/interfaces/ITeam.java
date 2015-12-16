@@ -1,5 +1,6 @@
 package interfaces;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface ITeam {
@@ -7,4 +8,5 @@ public interface ITeam {
     String getName();
     ITeamMember getLeader();
     List<ITeamMember> getTeamMembers();
+    BigDecimal getCost();
 }
