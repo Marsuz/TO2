@@ -76,6 +76,9 @@ public class ProjectOverviewController {
 
         projectMembersButton.disableProperty().bind(
                 Bindings.size(projectsTable.getSelectionModel().getSelectedItems()).isNotEqualTo(1));
+
+        projectFinancialDetailsButton.disableProperty().bind(
+                Bindings.size(projectsTable.getSelectionModel().getSelectedItems()).isNotEqualTo(1));
     }
 
     @FXML

@@ -82,8 +82,8 @@ public class ProjectMembersOverviewController {
         team2.setName("team2");
         team2.addTeamMember(new TeamMember(team2, new Employee(3, "Jan", "Nowak", new Salary(BigDecimal.ZERO), "occ")));
         loadTreeItems(team1, team2);
-        /*this.project = project;
-        teamsTable.getItems().setAll(project.getTeams());*/
+        this.project = project;
+        //teamsTable.getItems().setAll(project.getTeams());
     }
 
 

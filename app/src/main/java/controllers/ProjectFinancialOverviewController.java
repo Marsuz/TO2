@@ -1,6 +1,8 @@
 package controllers;
 
+import interfaces.ITeam;
 import interfaces.ITeamMember;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,16 +31,16 @@ public class ProjectFinancialOverviewController {
     private TableView<ITeamMember> membersTable;
 
     @FXML
-    private TableColumn<ITeamMember, String> NameColumn;
+    private TableColumn<ITeamMember, String> nameColumn;
 
     @FXML
-    private TableColumn<ITeamMember, String> RoleColumn;
+    private TableColumn<ITeamMember, String> roleColumn;
 
     @FXML
-    private TableColumn<ITeamMember, String> TeamColumn;
+    private TableColumn<ITeamMember, String> teamColumn;
 
     @FXML
-    private TableColumn<ITeamMember, BigDecimal> SalaryColumn;
+    private TableColumn<ITeamMember, BigDecimal> salaryColumn;
 
     @FXML
     private Button backButton;
@@ -62,10 +64,10 @@ public class ProjectFinancialOverviewController {
         membersTable.getSelectionModel().setSelectionMode(
                 SelectionMode.MULTIPLE);
 
-        //NameColumn.setCellValueFactory(dataValue -> dataValue.getValue().getEmployee().getFullNameProperty());
-        //RoleColumn.setCellValueFactory(dataValue -> new SimpleStringProperty(project.getMemberRoleMap().get(dataValue)));
-        //TeamColumn.setCellValueFactory(dataValue -> dataValue.getValue().getTeamProperty());
-        //SalaryColumn.setCellValueFactory(dataValue -> dataValue.getValue().getEmployee().getSalaryProperty());
+        nameColumn.setCellValueFactory(dataValue -> dataValue.getValue().getEmployee().getFullNameProperty());
+        roleColumn.setCellValueFactory(dataValue -> new SimpleStringProperty(project.getMemberRoleMap().get(dataValue.getValue())));
+        teamColumn.setCellValueFactory(dataValue -> new SimpleStringProperty(dataValue.getValue().getTeam().getName()));
+        salaryColumn.setCellValueFactory(dataValue -> dataValue.getValue().getEmployee().getSalaryProperty());
     }
 
     @FXML

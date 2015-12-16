@@ -13,20 +13,20 @@ import javafx.beans.property.StringProperty;
  */
 public class TeamMember implements ITeamMember{
 
-    private ITeam team;
+    private ObjectProperty<ITeam> teamProperty;
     private IEmployee employee;
 
     public TeamMember(ITeam team, IEmployee employee) {
-        this.team = team;
+        this.teamProperty = new SimpleObjectProperty<ITeam>(team);
         this.employee = employee;
     }
 
     public ITeam getTeam() {
-        return team;
+        return teamProperty.get();
     }
 
     public void setTeam(Team team) {
-        this.team = team;
+        teamProperty.set(team);
     }
 
     public IEmployee getEmployee() {
@@ -38,6 +38,27 @@ public class TeamMember implements ITeamMember{
     }
 
     public ObjectProperty<ITeam> getTeamProperty() {
-        return new SimpleObjectProperty<ITeam>(team);
+        return teamProperty;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        TeamMember that = (TeamMember) o;
+
+        if (!employee.equals(that.employee)) return false;
+        if (!teamProperty.equals(that.teamProperty)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = teamProperty.hashCode();
+        result = 31 * result + employee.hashCode();
+        return result;
     }
 }

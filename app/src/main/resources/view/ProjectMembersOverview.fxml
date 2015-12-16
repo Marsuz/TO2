@@ -9,9 +9,9 @@
    <center>
       <TreeTableView fx:id="membersTable" BorderPane.alignment="CENTER">
         <columns>
-            <TreeTableColumn fx:id="firstNameColumn" prefWidth="200.0" text="Imię" />
-            <TreeTableColumn fx:id="lastNameColumn" prefWidth="200.0" text="Nazwisko" />
-            <TreeTableColumn fx:id="occupationColumn" prefWidth="200.0" text="Stanowisko" />
+            <TreeTableColumn fx:id="firstNameColumn" prefWidth="200.0" text="First Name" />
+            <TreeTableColumn fx:id="lastNameColumn" prefWidth="200.0" text="Last Name" />
+            <TreeTableColumn fx:id="occupationColumn" prefWidth="200.0" text="Occupation" />
         </columns>
       </TreeTableView>
    </center>

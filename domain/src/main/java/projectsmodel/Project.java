@@ -122,4 +122,23 @@ public class Project {
         return new Project();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Project project = (Project) o;
+
+        if (projectId != project.projectId) return false;
+        if (!name.equals(project.name)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (projectId ^ (projectId >>> 32));
+        result = 31 * result + name.hashCode();
+        return result;
+    }
 }
